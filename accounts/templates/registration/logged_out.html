@@ -1,0 +1,12 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}تسجيل طالب جديد{% endblock title %}
+{% block content %}
+<div class="text-center">
+  {% comment %} <img src="{% static 'img/a3.png' %}" alt="" width="1000px" hight="500px"/> {% endcomment %}
+</div>
+<div class="container pb-5 pt-5">
+  <p>تم تسجيل الخروج!</p>
+  <a class="genric-btn info-border circle w-100" href="{% url 'login'%}">لقد قمت بالخروج من النظام اضغط هنا للدخول</a>
+</div>
+{% endblock %}

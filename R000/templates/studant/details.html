@@ -1,0 +1,110 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}تفاصيل الطالب{% endblock title %}
+{% block content %}
+<div class="container pt-5">
+  <a href="{% url 'registration:studant' batch_id=studant.batch.id %}"><h1><i class="fa fa-fw fa-arrow-circle-right"></i></a></h1>
+  <h1>الطالب / {{studant.name}}</h1>
+  <div class="box-body">
+    <div class="table-responsive">
+      <table class="table mb-0">
+        <thead class="table-light">
+        <tr>
+          <th scope="col">رقم الطالب</th>
+          <th scope="col">نوع القبول</th>
+          <th scope="col">الفصل الدراسي</th>
+          <th scope="col">الرسوم</th>
+          <th scope="col">الحالة المالية</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th scope="row">{{studant.id}}</th>
+          <td>{{studant.accept_type}}</td>
+          <td>{{studant.batch.name}}</td>
+          <td>{{studant.toll}} جنيه </td>
+          <td>{{studant.toll_status}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="box-body">
+    <div class="table-responsive">
+      <table class="table mb-0">
+        <thead class="table-light">
+        <tr>
+          <th scope="col">تاريخ الميلا</th>
+          <th scope="col">مكان الميلاد</th>
+          <th scope="col">النوع</th>
+          <th scope="col">الجنسية</th>
+          <th scope="col">الديانة</th>
+          <th scope="col">الرقم الوطني</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th scope="row">{{studant.born_at|date:'Y / m / d'}}</th>
+          <td>{{studant.born_in}}</td>
+          <td>{{studant.gender}}</td>
+          <td>{{studant.nationality}}</td>
+          <td>{{studant.religion}}</td>
+          <td>{{studant.public_number}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="box-body">
+    <div class="table-responsive">
+      <table class="table mb-0">
+        <thead class="table-light">
+        <tr>
+          <th scope="col">العنوان</th>
+          <th scope="col">الولاية</th>
+          <th scope="col">المحلية</th>
+          <th scope="col">رقم الهاتف</th>
+          <th scope="col">البريد الإلكتروني</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th scope="row">{{studant.address}}</th>
+          <td>{{studant.state}}</td>
+          <td>{{studant.city}}</td>
+          <td>{{studant.phone_number}}</td>
+          <td>{{studant.email}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="box-body">
+    <div class="table-responsive">
+      <table class="table mb-0">
+        <thead class="table-light">
+        <tr>
+          <th scope="col">اسم المدرسم</th>
+          <th scope="col">نوع الشهادة</th>
+          <th scope="col"> نسبة القبول</th>
+          <th scope="col">فصيلة الدم</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th scope="row">{{studant.school_name}}</th>
+          <td>{{studant.certificate_type}}</td>
+          <td>{{studant.accept_degeer}} %</td>
+          <td>{{studant.blood_type}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

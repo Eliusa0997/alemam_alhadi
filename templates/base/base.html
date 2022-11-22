@@ -1,0 +1,37 @@
+
+{% load static %} 
+   <head>
+      <meta charset="UTF-8">
+      <title> {% block title %} {% endblock title %}</title>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!--enable mobile device-->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!--fontawesome css -->
+	<link rel="stylesheet" href="{% static 'EduAdmin/css/vendors_css.css' %}">
+	  
+	<!-- Style-->    
+	<link rel="stylesheet" href="{% static 'EduAdmin/css/style.css' %}">
+     
+   </head>
+  <body class="hold-transition light-skin sidebar-mini theme-primary fixed rtl">
+{% block content %}
+
+{% endblock content %}
+
+<footer class="main-footer mb-0">
+   <div class="pull-right d-none d-sm-inline-block">
+      {% if 'login' in request.path or 'home' in request.path or 'accounts/logout' in request.path %}
+         {% else %}
+            <div class="pt-0">
+            <a href="{% url 'logout' %}" >تسجيل الخروج</a>
+            </div>
+         {% endif %}
+   </div>
+</footer>
+
+      <!--main js--> 
+	<script src="{% static 'EduAdmin/js/vendors.min.js' %}"></script>
+	<!-- EduAdmin App -->
+	<script src="{% static 'EduAdmin/js/template.js' %}"></script>	
+   </body>
+</html>

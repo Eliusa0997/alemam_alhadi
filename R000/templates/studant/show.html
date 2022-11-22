@@ -1,0 +1,69 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}الطلاب{% endblock title %}
+{% block content %}
+<div class="text-center">
+    {% comment %} <img src="{% static 'img/a3.png' %}" alt="" width="500px" hight="500px"/> {% endcomment %}
+</div>
+<div class="container pt-5 pb-5">
+<section class="py-md-10">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex align-items-center">
+                <div class="me-auto">
+                    <div class="d-inline-block align-items-center">
+                        <nav>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'registration:college' %}"><h1> الكليات</a></li></h1>
+                                <a href="{% url 'registration:department' college_id=batch.program.department.college.id %}"><h1> / الأقسام</a></h1>
+                                <a href="{% url 'registration:program' department_id=batch.program.department.id %}"><h1> / الدفع</a></h1>
+                                <a href="{% url 'registration:batch' program_id=batch.program.id %}"><h1> / الفصول</a></h1>
+                                <h1> / الطلاب</h1>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="header-links">
+            <a href="{% url 'registration:add-studant' batch_id=batch.id %}">
+                <h1>تسجيل طالب جديد &nbsp; <i class="fa fa-plus-square" aria-hidden="true"></i></h1>
+            </a>
+        </div>
+      <div class="table-responsive-md">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr role="row">
+                        <th style="width: 5%; text-align: center;">رقم الطالب</th>
+                        <th style="width: 20%; text-align: center;">اسم الطالب</th>            
+                        <th style="width: 20%; text-align: center;">بيانات</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                        {% for studant in studants %}
+                            <tr role="row" class="odd">
+                                <td style="text-align: center;">{{ forloop.counter }}</td>
+                                <td style="text-align: center;">{{ studant.name }}</td>
+                                <td style="text-align: center;">
+                                      <a href="{% url 'registration:edit-studant' studant_id=studant.id batch_id=batch.id %}">
+                                        <i class="fa fa-edit" aria-hidden="true"></i>&nbsp;تعديل
+                                    </a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="{% url 'registration:details' studant_id=studant.id %}">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;التفاصيل 
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %} 
+                    </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

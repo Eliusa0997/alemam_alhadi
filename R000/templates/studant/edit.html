@@ -1,0 +1,25 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}تعديل بيانات طالب{% endblock title %}
+{% block content %}
+
+<div class="container pt-5">
+    <a href="{% url 'registration:studant' batch_id=batch.id %}"><h1><i class="fa fa-fw fa-arrow-circle-right"></i></a></h1>
+    <h1>تعديل بيانات الطالب</h1>
+    <section class="add">
+        <form action="{% url 'registration:update-studant' batch_id=batch.id studant_id=studant.id %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table class="table">
+                {{ form.as_table }}            
+                <tr>
+                    <td width="15%"></td>
+                    <td width="85%">
+                        <button type="submit" class="btn btn-success">تحديث</button>
+                        <a href="{% url 'registration:studant' batch_id=batch.id %}" class="btn btn-default">تراجع</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </section>
+</div>
+{% endblock content %}
