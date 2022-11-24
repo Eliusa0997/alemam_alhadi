@@ -12,6 +12,7 @@ urlpatterns = [
     # path('about/system', views.about_sys, name="about-sys"),
 
     path('', views.college, name="college"),
+    # path('admin/', views.college, name="college"),
     # path('college', views.college, name="college"),
     path('department/<int:college_id>', views.department, name="department"),
     path('program/<int:department_id>', views.program, name="program"),

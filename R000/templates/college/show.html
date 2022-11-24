@@ -20,6 +20,17 @@
     </div>
 </section>
 <div class="container pt-5 pb-5">
+    {% block auth %}
+    {% if 'login' in request.path or 'home' in request.path or 'accounts/logout' in request.path %}
+       {% else %}
+       <h4>
+       <i class="fa fa-sign-out"> &nbsp;&nbsp;</i><a href="{% url 'logout' %}" >تسجيل الخروج</a> 
+       </h4>
+       {% endif %}
+    
+    {% endblock auth %}
+    <i class="fa fa-dashboard"> &nbsp;&nbsp;</i><a href="http://127.0.0.1:8000/admin/" > لوحة التحكم </a> 
+
     <h1>الكليات</h1>
 <div class="row">
     <div class="col-lg-12">

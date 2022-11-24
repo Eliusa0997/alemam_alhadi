@@ -13,6 +13,15 @@
                 <div class="me-auto">
                     <div class="d-inline-block align-items-center">
                         <nav>
+                            {% block auth %}
+                            {% if 'login' in request.path or 'home' in request.path or 'accounts/logout' in request.path %}
+                               {% else %}
+                               <h4>
+                               <i class="fa fa-sign-out"> &nbsp;&nbsp;</i><a href="{% url 'logout' %}" >تسجيل الخروج</a> 
+                               </h4>
+                               {% endif %}
+                            
+                            {% endblock auth %}
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{% url 'registration:college' %}"><h1> الكليات</a></li></h1>
                                 <a href="{% url 'registration:department' college_id=program.department.college.id %}"><h1> / الأقسام</a></h1>
