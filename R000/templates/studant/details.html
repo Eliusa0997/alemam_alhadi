@@ -3,7 +3,7 @@
 {% block title %}تفاصيل الطالب{% endblock title %}
 {% block content %}
 <div class="container pt-5">
-  <a href="{% url 'registration:studant' batch_id=studant.batch.id %}"><h1><i class="fa fa-fw fa-arrow-circle-right"></i></a></h1>
+  <a href="{% url 'registration:studant' semster_id=studant.semster.id %}"><h1><i class="fa fa-fw fa-arrow-circle-right"></i></a></h1>
   <h1>الطالب / {{studant.name}}</h1>
   <div class="box-body">
     <div class="table-responsive">
@@ -21,7 +21,7 @@
         <tr>
           <th scope="row">{{studant.id}}</th>
           <td>{{studant.accept_type}}</td>
-          <td>{{studant.batch.name}}</td>
+          <td>{{studant.semster.name}}</td>
           <td>{{studant.toll}} جنيه </td>
           <td>{{studant.toll_status}}</td>
         </tr>

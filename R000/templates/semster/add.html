@@ -1,0 +1,26 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}إضافة فصل دراسي{% endblock title %}
+{% block content %}
+
+
+<section class="add">
+    <div class="container">
+        <h1>الدفعة {{batch.name}} / إضافة فصل دراسي  </h1>
+        <form action="{% url 'registration:insert-semster' batch_id=batch.id %}" method="POST">
+            {% csrf_token %}
+            <table class="table">
+                {{ form.as_table }}            
+                <tr>
+                    <td width="15%"></td>
+                    <td width="85%">
+                        <button type="submit" class="btn btn-success">إضافة</button>
+                        <a href="{% url 'registration:semster' batch_id=batch.id %}" class="btn btn-default">تراجع</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</section>
+
+{% endblock content %}

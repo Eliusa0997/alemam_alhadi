@@ -1,5 +1,51 @@
 from django import forms
-from .models import Studant
+from .models import Studant, College, Department, Batch, Semster
+
+class CollegeForm(forms.ModelForm):
+  class Meta:
+    model = College 
+    fields = ('name', 'address')
+    widgets = { 
+          'name': forms.Textarea(attrs={'rows':1, 'class':'form-control', 'required': 'False', 'placeholder':('')}),
+          'address': forms.Textarea(attrs={'rows':1, 'class':'form-control', 'required': 'False', 'placeholder':('')}),
+    }    
+    labels = {
+        'name': ('الإسم'),
+        'address': ('العنوان'),
+      }  
+
+class DepartmentForm(forms.ModelForm):
+  class Meta:
+    model = Department 
+    fields = ('name',)
+    widgets = { 
+      'name': forms.Textarea(attrs={'rows':1, 'class':'form-control', 'required': 'False', 'placeholder':('')}),
+    }    
+    labels = {
+      'name': ('الإسم')
+    }        
+
+class BatchForm(forms.ModelForm):
+  class Meta:
+    model = Batch 
+    fields = ('name',)
+    widgets = { 
+      'name': forms.Textarea(attrs={'rows':1, 'class':'form-control', 'required': 'False', 'placeholder':('')}),
+    }    
+    labels = {
+      'name': ('الإسم')
+    }  
+
+class SemsterForm(forms.ModelForm):
+  class Meta:
+    model = Semster 
+    fields = ('name',)
+    widgets = { 
+      'name': forms.Textarea(attrs={'rows':1, 'class':'form-control', 'required': 'False', 'placeholder':('')}),
+    }    
+    labels = {
+      'name': ('الإسم')
+    }   
 
 class StudantForm(forms.ModelForm):
   class Meta:

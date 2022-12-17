@@ -6,9 +6,9 @@
 
 <section class="add">
     <div class="container">
-    <a href="{% url 'registration:studant' batch_id=batch.id %}"><h1><i class="fa fa-fw fa-arrow-circle-right"></i></a></h1>
-        <h1>تسجيل طالب</h1>
-        <form action="{% url 'registration:insert-studant' batch_id=batch.id %}" method="POST" enctype="multipart/form-data">
+    <a href="{% url 'registration:studant' semster_id=semster.id %}"><h1><i class="fa fa-fw fa-arrow-circle-right"></i></a></h1>
+    <h1>الفصل الدراسي {{semster.name}} /  تسجيل طالب  </h1>
+        <form action="{% url 'registration:insert-studant' semster_id=semster.id %}" method="POST" \>
             {% csrf_token %}
             <table class="table">
                 {{ form.as_table }}            
@@ -16,7 +16,7 @@
                     <td width="15%"></td>
                     <td width="85%">
                         <button type="submit" class="btn btn-success">تسجيل</button>
-                        <a href="{% url 'registration:studant' batch_id=batch.id %}" class="btn btn-default">تراجع</a>
+                        <a href="{% url 'registration:studant' semster_id=semster.id %}" class="btn btn-default">تراجع</a>
                     </td>
                 </tr>
             </table>

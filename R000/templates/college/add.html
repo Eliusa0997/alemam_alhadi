@@ -1,0 +1,26 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}إضافة كلية{% endblock title %}
+{% block content %}
+
+
+<section class="add pt-100">
+    <div class="container">
+        <h1>إضافة كلية</h1>
+            <form action="{% url 'registration:insert-college'%}" method="POST">
+            {% csrf_token %}
+            <table class="table">
+                {{ form.as_table }}            
+                <tr>
+                    <td width="15%"></td>
+                    <td width="85%">
+                        <button type="submit" class="btn btn-success">إضافة</button>
+                        <a href="{% url 'registration:college'%}" class="btn btn-default">تراجع</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</section>
+
+{% endblock content %}

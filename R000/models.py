@@ -16,14 +16,14 @@ class Department(models.Model):
     def __str__(self):
         return self.name
     
-class Program(models.Model):
-    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name="program_department")
+class Batch(models.Model):
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name="batch_department")
     name = models.CharField(max_length=50, null=True, blank=True)
     def __str__(self):
         return self.name
 
-class Batch(models.Model):
-    program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name="batch_program")
+class Semster(models.Model):
+    batch = models.ForeignKey(Batch, null=True, blank=True, on_delete=models.CASCADE, related_name="semster_batch")
     name = models.CharField(max_length=50, null=True, blank=True)
     def __str__(self):
         return self.name
@@ -65,7 +65,7 @@ class Studant(models.Model):
         ('O+', 'O+'),
         ('AB', 'AB'),
     )  
-    batch = models.ForeignKey(Batch, on_delete=models.CASCADE, related_name="studant_batch")
+    semster = models.ForeignKey(Semster, null=True, blank=True, on_delete=models.CASCADE, related_name="studant_semster")
     nationality = models.ForeignKey(Nationality, on_delete=models.CASCADE, related_name="studant_nationality", null=True, blank=True)
     name = models.CharField(max_length=50, null=True, blank=True)
     universitiy_number = models.IntegerField(null=True, blank=True)

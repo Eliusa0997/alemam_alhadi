@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import College, Department, Program, Batch, Studant
-from .forms import StudantForm
+from .models import College, Department, Batch, Semster, Studant
+from .forms import StudantForm, CollegeForm, DepartmentForm, BatchForm, SemsterForm
 
 from django.contrib.auth.decorators import login_required
 
@@ -26,44 +26,44 @@ def college(request):
 def department(request ,college_id):
     college = College.objects.get(id=college_id)
     department = Department.objects.filter(college=college)
-    context = {'departments':department}
+    context = {'departments':department, 'college':college}
     return render(request, 'department/show.html', context)
 
-def program(request ,department_id):
+def batch(request ,department_id):
     department = Department.objects.get(id=department_id)
-    program = Program.objects.filter(department=department)
-    context = {'programs':program,'department':department}
-    return render(request, 'program/show.html', context)
-
-def batch(request ,program_id):
-    program = Program.objects.get(id=program_id)
-    batch = Batch.objects.filter(program=program)
-    context = {'batchs':batch, 'program':program}
+    batch = Batch.objects.filter(department=department)
+    context = {'batchs':batch,'department':department}
     return render(request, 'batch/show.html', context)
 
-
-
-def studant(request ,batch_id):
+def semster(request ,batch_id):
     batch = Batch.objects.get(id=batch_id)
-    studant = Studant.objects.filter(batch=batch)
-    context = {'studants':studant, 'batch':batch}
+    semster = Semster.objects.filter(batch=batch)
+    context = {'semsters':semster, 'batch':batch}
+    return render(request, 'semster/show.html', context)
+
+
+
+def studant(request ,semster_id):
+    semster = Semster.objects.get(id=semster_id)
+    studant = Studant.objects.filter(semster=semster)
+    context = {'studants':studant, 'semster':semster}
     return render(request, 'studant/show.html', context)
 
-def add_studant(request, batch_id):
-    batch = Batch.objects.get(id=batch_id)
+def add_studant(request, semster_id):
+    semster = Semster.objects.get(id=semster_id)
     context = {
-                'batch' : batch,
+                'semster' : semster,
                 'form':StudantForm()
     }
     return render(request, 'studant/add.html', context)
 
-def insert_studant(request, batch_id):
+def insert_studant(request, semster_id):
     if request.method == "POST":
-        batch = Batch.objects.get(id=batch_id)
-        form = StudantForm(request.POST,  request.FILES)
+        semster = Semster.objects.get(id=semster_id)
+        form = StudantForm(request.POST)
         if form.is_valid():  
             Studant.objects.create(
-                batch=batch,
+                semster=semster,
 				name=form.cleaned_data['name'],
 				universitiy_number=form.cleaned_data['universitiy_number'],
 				accept_type=form.cleaned_data['accept_type'],
@@ -86,28 +86,107 @@ def insert_studant(request, batch_id):
 			)
         else:
             form = StudantForm()
-    return redirect("registration:studant", batch_id=batch_id) 
+    return redirect("registration:studant", semster_id=semster_id) 
 
 def details(request, studant_id):
     studant = Studant.objects.get(id=studant_id)
     context = {'studant':studant}
     return render(request, 'studant/details.html', context)
 
-def edit_studant(request, batch_id, studant_id):
-    batch = Batch.objects.get(pk=batch_id)
+def edit_studant(request, semster_id, studant_id):
+    semster = Semster.objects.get(pk=semster_id)
     studant = Studant.objects.get(pk=studant_id)
     context = {
-                'batch': batch,
+                'semster': semster,
                 'studant' : studant,
                 'form': StudantForm(instance=studant)
     }
     return render(request, 'studant/edit.html', context)
 
-def update_studant(request, batch_id, studant_id):
+def update_studant(request, semster_id, studant_id):
     if request.method == "POST":
         form = StudantForm(request.POST, instance=Studant.objects.get(pk=studant_id))
         if form.is_valid():  
             form.save()
         else:
             form = StudantForm()
-    return redirect("registration:studant", batch_id=batch_id) 
+    return redirect("registration:studant", semster_id=semster_id) 
+
+
+def add_college(request):
+    context = {          
+        'form':CollegeForm()
+    }
+    return render(request, 'college/add.html', context)
+
+def insert_college(request):
+    if request.method == "POST":
+        form = CollegeForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            form = CollegeForm()
+    return redirect("registration:college") 
+
+def add_department(request, college_id):
+    college = College.objects.get(id=college_id)
+    context = {          
+        'college':college,
+        'form':DepartmentForm(),
+    }
+    return render(request, 'department/add.html', context)
+
+def insert_department(request, college_id):
+    college = College.objects.get(id=college_id)    
+    if request.method == "POST":
+        form = DepartmentForm(request.POST)
+        if form.is_valid():
+            Department.objects.create(
+                college=college,
+                name=form.cleaned_data['name'], 
+            )           
+        else:
+            form = DepartmentForm()
+    return redirect("registration:department", college_id=college_id)
+
+def add_batch(request, department_id):
+    department = Department.objects.get(id=department_id)
+    context = {          
+        'department':department,
+        'form':BatchForm(),
+    }
+    return render(request, 'batch/add.html', context)
+
+def insert_batch(request, department_id):
+    department = Department.objects.get(id=department_id)  
+    if request.method == "POST":
+        form = BatchForm(request.POST)
+        if form.is_valid():
+            Batch.objects.create(
+                department=department,
+                name=form.cleaned_data['name'], 
+            )           
+        else:
+            form = BatchForm()
+    return redirect("registration:batch", department_id=department_id)
+
+def add_semster(request, batch_id):
+    batch = Batch.objects.get(id=batch_id)
+    context = {          
+        'batch':batch,
+        'form':SemsterForm(),
+    }
+    return render(request, 'semster/add.html', context)
+
+def insert_semster(request, batch_id):
+    batch = Batch.objects.get(id=batch_id)
+    if request.method == "POST":
+        form = SemsterForm(request.POST)
+        if form.is_valid():
+            Semster.objects.create(
+                batch=batch,
+                name=form.cleaned_data['name'], 
+            )           
+        else:
+            form = SemsterForm()
+    return redirect("registration:semster", batch_id=batch_id)

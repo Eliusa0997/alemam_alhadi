@@ -5,13 +5,12 @@
 
 <div class="container pt-5 pb-5">
     {% block auth %}
-    {% if 'login' in request.path or 'home' in request.path or 'accounts/logout' in request.path %}
+        {% if 'login' in request.path or 'home' in request.path or 'accounts/logout' in request.path %}
        {% else %}
-       <h4>
-       <i class="fa fa-sign-out"> &nbsp;&nbsp;</i><a href="{% url 'logout' %}" >تسجيل الخروج</a> 
-       </h4>
+        <h4>
+        <i class="fa fa-sign-out"> &nbsp;&nbsp;</i><a href="{% url 'logout' %}" >تسجيل الخروج</a> 
+        </h4>
        {% endif %}
-    
     {% endblock auth %}
 <section class="py-md-10">
     <div class="row">
@@ -21,11 +20,11 @@
                     <div class="d-inline-block align-items-center">
                         <nav>
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{% url 'registration:college' %}"><h1> الكليات</a></li></h1>
-                                <a href="{% url 'registration:department' college_id=batch.program.department.college.id %}"><h1> / الأقسام</a></h1>
-                                <a href="{% url 'registration:program' department_id=batch.program.department.id %}"><h1> / الدفع</a></h1>
-                                <a href="{% url 'registration:batch' program_id=batch.program.id %}"><h1> / الفصول</a></h1>
-                                <h1> / الطلاب</h1>
+                                <li class="breadcrumb-item"><a href="{% url 'registration:college' %}"><h3> الكليات</a></li></h3>
+                                <a href="{% url 'registration:department' college_id=semster.batch.department.college.id %}"><h3> / الأقسام</a></h3>
+                                <a href="{% url 'registration:batch' department_id=semster.batch.department.id %}"><h3> / الدفع</a></h3>
+                                <a href="{% url 'registration:semster' batch_id=semster.batch.id %}"><h3> / الفصول</a></h3>
+                                <h3> / الطلاب</h3>
                             </ol>
                         </nav>
                     </div>
@@ -36,12 +35,12 @@
 </section>
 
 <div class="row">
-    <div class="col-lg-12">
-        <div class="header-links">
-            <a href="{% url 'registration:add-studant' batch_id=batch.id %}">
-                <h3>تسجيل طالب جديد <i class="fa fa-plus-square fa-1x"></i></h3>
-            </a>
-        </div>
+  <div class="col-lg-12">
+    <div class="header-links pb-5">
+      <a href="{% url 'registration:add-studant' semster_id=semster.id %}">
+        <i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp;تسجيل
+      </a>
+    </div>
       <div class="table-responsive-md">
             <table class="table table-striped table-bordered">
                 <thead>
@@ -57,7 +56,7 @@
                                 <td style="text-align: center;">{{ forloop.counter }}</td>
                                 <td style="text-align: center;">{{ studant.name }}</td>
                                 <td style="text-align: center;">
-                                      <a href="{% url 'registration:edit-studant' studant_id=studant.id batch_id=batch.id %}">
+                                      <a href="{% url 'registration:edit-studant' studant_id=studant.id semster_id=semster.id %}">
                                         <i class="fa fa-edit" aria-hidden="true"></i>&nbsp;تعديل
                                     </a>
                                     &nbsp;&nbsp;&nbsp;&nbsp;

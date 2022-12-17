@@ -1,0 +1,27 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}إضافة قسم{% endblock title %}
+{% block content %}
+
+
+<section class="add">
+    <div class="container">
+        
+        <h1>كلية {{college.name}} / إضافة قسم </h1>
+        <form action="{% url 'registration:insert-department' college_id=college.id %}" method="POST">
+            {% csrf_token %}
+            <table class="table">
+                {{ form.as_table }}            
+                <tr>
+                    <td width="15%"></td>
+                    <td width="85%">
+                        <button type="submit" class="btn btn-success">إضافة</button>
+                        <a href="{% url 'registration:department' college_id=college.id %}" class="btn btn-default">تراجع</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</section>
+
+{% endblock content %}
