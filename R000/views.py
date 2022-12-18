@@ -17,7 +17,8 @@ def about_uni(request):
 def about_sys(request):
     context = {}
     return render(request, 'home/about_sys.html', context)
-
+    
+@login_required
 def college(request):
     colleges = College.objects.all()
     context = {'colleges':colleges}
