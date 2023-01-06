@@ -84,6 +84,7 @@ def insert_studant(request, semster_id):
 				school_name=form.cleaned_data['school_name'],
 				certificate_type=form.cleaned_data['certificate_type'],
 				accept_degeer=form.cleaned_data['accept_degeer'],
+				major=form.cleaned_data['major'],
 			)
         else:
             form = StudantForm()

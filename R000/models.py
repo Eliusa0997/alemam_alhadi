@@ -91,6 +91,7 @@ class Studant(models.Model):
     blood_type = models.CharField(max_length=190 , null=True, choices=BLOODTYPE)
     certificate_type = models.CharField(max_length=190 , null=True, choices=CERTIFICATE_TYPE)
     accept_degeer = models.IntegerField(null=True, blank=True)
+    major = models.CharField(max_length=190 , null=True, blank=True)
 
     def __str__(self):
         return self.name

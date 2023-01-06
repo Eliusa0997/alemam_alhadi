@@ -53,7 +53,7 @@ class StudantForm(forms.ModelForm):
     fields = ('name', 'universitiy_number', 'toll', 'toll_status', 'accept_type',
               'nationality','born_in', 'born_at', 'gender', 'public_number', 'religion',
               'address', 'state', 'city', 'phone_number', 'email',
-              'school_name', 'certificate_type', 'accept_degeer','blood_type',
+              'school_name', 'certificate_type', 'accept_degeer','blood_type', 'major',
       )
     widgets = { 
         'name': forms.Textarea(attrs={'rows':1, 'class':'form-control', 'required': 'False', 'placeholder':('')}),
@@ -76,6 +76,7 @@ class StudantForm(forms.ModelForm):
         'school_name': forms.Textarea(attrs={'rows':1, 'class':'form-control', 'placeholder':('')}),
         'certificate_type': forms.Select(attrs={'rows':1,'class':'form-control',  'required': 'False'}),        
         'accept_degeer': forms.NumberInput(attrs={'rows':1, 'class':'form-control', 'placeholder':('')}),
+        'major': forms.Textarea(attrs={'rows':1, 'class':'form-control', 'placeholder':('')}),
     }
     labels = {
         'name': ('الإسم'),
@@ -98,4 +99,5 @@ class StudantForm(forms.ModelForm):
         'certificate_type': ('نوع الشهادة'),
         'accept_degeer': ('نسبة القبول'),
         'blood_type': (' فصيلة الدم '),
+        'major': ('التخصص'),
     }
