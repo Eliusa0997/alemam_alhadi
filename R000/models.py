@@ -93,5 +93,6 @@ class Studant(models.Model):
     accept_degeer = models.IntegerField(null=True, blank=True)
     major = models.CharField(max_length=190 , null=True, blank=True)
 
+
     def __str__(self):
         return self.name
